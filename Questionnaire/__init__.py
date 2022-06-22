@@ -1,5 +1,5 @@
 from otree.api import *
-from regex import D
+
 
 
 doc = """
@@ -49,8 +49,8 @@ class Player(BasePlayer):
             'No schooling completed',
             'High school graduate',
             'Trade/technical/vocational training',
-            'Bachelor’s degree',
-            'Master’s degree',
+            'Bachelor degree',
+            'Master degree',
             'Professional degree',
             'Doctorate degree'
 
