@@ -1,6 +1,6 @@
 from otree.api import *
 import numpy as np
-import pandas as pd
+
 
 doc = """
 Create the two-stage investment task
