@@ -65,24 +65,12 @@ class Justification(Page):
     form_model = 'player'
     form_fields = ['justification']
 
-    timeout_seconds = 120
-
-    @staticmethod
-    def before_next_page(player, timeout_happened):
-        if timeout_happened:
-            player.autosubmit = True
-
 
 
 class Demographics(Page):
     form_model = 'player'
     form_fields = ['age', 'gender', 'education_level', 'education_field']
     
-    timeout_seconds = 15
 
-    @staticmethod
-    def before_next_page(player, timeout_happened):
-        if timeout_happened:
-            player.autosubmit = True
 
 page_sequence = [Justification, Demographics]

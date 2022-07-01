@@ -3,6 +3,12 @@
 {{ endblock }}
 
 {{ block content }}
+    <style>
+        .otree-timer {
+         display: none;
+        }
+    </style>
+    
     By selecting "I agree" below I agree that:
     <br>
     <br>
@@ -15,4 +21,5 @@
     {{formfield player.consent}}
 
     {{ next_button }}
+
 {{ endblock }}

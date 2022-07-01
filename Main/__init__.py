@@ -1,5 +1,6 @@
 from otree.api import *
 import numpy as np
+import time 
 
 
 doc = """
@@ -31,7 +32,6 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     Prolific_ID       = models.StringField()
-    autosubmit = models.BooleanField(blank=True)
 
     # Project selection decision
     project           = models.StringField(
@@ -49,6 +49,12 @@ class Player(BasePlayer):
             ],
         label= 'Do you want to pay the additioal investment cost to finalize the project?'
             )
+
+    start_1          = models.IntegerField(blank=True)
+    end_1            = models.IntegerField(blank=True)
+    start_2          = models.IntegerField(blank=True)
+    end_2            = models.IntegerField(blank=True)
+
 
     # Attributes of the treatment to be saved for each player
     sunk_cost        = models.IntegerField(blank=True)
@@ -91,9 +97,14 @@ class Project_selection(Page):
     form_model  = 'player'
     form_fields = ['project']
 
+    # Reaction times
+    def vars_for_template(player):
+        player.start_1   = int(time.time())
+        return dict( 
+            start_1 = player.start_1 
+        )
+
     # Create information for each project and allocate it to the right variables based on player's choice
-  
-    timeout_seconds = 10
 
     @staticmethod
     def before_next_page(player, timeout_happened):
@@ -107,29 +118,36 @@ class Project_selection(Page):
             player.sunk_cost     = inv_B[0]
             player.prob_chosen   = inv_B[1]
             player.prob_unchosen = inv_A[1]
-        if timeout_happened:
-            player.autosubmit = True
-
-
+        
+        player.end_1 = int(time.time())
+        return dict(
+            end_1 = player.end_1
+        )
+  
+        
 class Project_continuation(Page):
     form_model  = 'player'
     form_fields = ['additional_invest']
 
     @staticmethod
     def vars_for_template(player):
+        player.start_1   = int(time.time())
+        player.current_balance = C.initial_endowment - player.sunk_cost + C.revenue_buffer
         return dict(
             sunk_cost             = player.sunk_cost,
             prob_success_chosen   = player.prob_chosen,
             prob_success_unchosen = player.prob_unchosen,
-            current_balance       = C.initial_endowment - player.sunk_cost + C.revenue_buffer
+            current_balance       = player.current_balance,
+            start_1               = player.start_1 
         )
-
-    timeout_seconds = 180
 
     @staticmethod
     def before_next_page(player, timeout_happened):
-        if timeout_happened:
-            player.autosubmit = True
+        player.end_2 = int(time.time())
+        return dict(
+            end_2 = player.end_2
+        )
+  
 
 class Results(Page):
     @staticmethod
@@ -138,13 +156,6 @@ class Results(Page):
         return dict(
             payoff = payoff
         )
-    
-    timeout_seconds = 5
 
-    @staticmethod
-    def before_next_page(player, timeout_happened):
-        if timeout_happened:
-            player.autosubmit = True
     
-
 page_sequence = [Project_selection, Project_continuation, Results]

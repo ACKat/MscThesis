@@ -1,0 +1,21 @@
+
+
+{{block content}}
+    <style>
+        .otree-timer {
+         display: none;
+        }
+    </style>
+
+<h5> Is it all clear? </h5>
+<br>
+
+<p> 
+    Please answer the following question correctly and press "Next" to proceed: 
+    {{formfield player.check_1}}
+
+</p>
+
+{{ next_button }}
+
+{{endblock}}

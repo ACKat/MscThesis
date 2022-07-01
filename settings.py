@@ -9,7 +9,7 @@ SESSION_CONFIGS = [
 
     dict(
     name='Thesis_experiment',
-    app_sequence=['Instructions', 'Main', 'Questionnaire', 'End'],
+    app_sequence=['Instructions', 'Main', 'Questionnaire', 'End', 'Early_exit'],
     num_demo_participants=3,
     ),   
 
@@ -30,7 +30,8 @@ PARTICIPANT_FIELDS = [
     'sunk_cost',
     'prob_chosen',
     'prob_unchosen',
-    'current_balance'
+    'current_balance',
+    'timeSpent_1',
 ]
 SESSION_FIELDS = []
 

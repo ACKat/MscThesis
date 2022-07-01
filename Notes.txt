@@ -1,0 +1,13 @@
+To do:
+1) Fix timers
+2) RTs
+4) Payment
+6) Save at the participant level
+7) change to otree production? so that details do not appear
+
+
+
+       
+
+
+
