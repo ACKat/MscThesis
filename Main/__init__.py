@@ -47,7 +47,7 @@ class Player(BasePlayer):
             [True, 'Yes'],
             [False, 'No']
             ],
-        label= 'Do you want to pay the additioal investment cost to finalize the project?'
+        label= 'Do you want to pay the additional investment cost to finalize the project?'
             )
 
     start_1          = models.IntegerField(blank=True)
@@ -60,7 +60,6 @@ class Player(BasePlayer):
     sunk_cost        = models.IntegerField(blank=True)
     prob_chosen      = models.FloatField(blank=True)
     prob_unchosen    = models.FloatField(blank=True)
-    current_balance  = models.IntegerField(blank=True)
 
 # FUNCTIONS
 
@@ -72,11 +71,24 @@ def investment(sc, p):
         investment[0] = sc[0]
     else:
         investment[0] = sc[1]
-    if rand_num[1] > 0.5:         # if the second random number exceeds 0.5 the probability will be 0.4 and 0.6 otherwise
+    if rand_num[1] > 0.5:         # if the second random number exceeds 0.5 the probability will be 0.25 and 0.75 otherwise
         investment[1] = p[0]
     else:
         investment[1] = p[1]
     return investment
+
+def project_creation(player):
+    inv_A = investment(C.initial_inv_cost, C.prob_success)
+    inv_B = investment(C.initial_inv_cost, C.prob_success)
+    if  player.project == 'Project A':
+        player.sunk_cost     = inv_A[0]
+        player.prob_chosen   = inv_A[1]
+        player.prob_unchosen = inv_B[1]
+    elif player.project == 'Project B':
+        player.sunk_cost     = inv_B[0]
+        player.prob_chosen   = inv_B[1]
+        player.prob_unchosen = inv_A[1]
+
 
 # Calculate the payoff depending on participant's choice on whether to carry on with the project and 
 # the outcome of the chosen lottery
@@ -105,19 +117,11 @@ class Project_selection(Page):
         )
 
     # Create information for each project and allocate it to the right variables based on player's choice
-
     @staticmethod
     def before_next_page(player, timeout_happened):
-        inv_A = investment(C.initial_inv_cost, C.prob_success)
-        inv_B = investment(C.initial_inv_cost, C.prob_success)
-        if   player.project == 'Project A':
-            player.sunk_cost     = inv_A[0]
-            player.prob_chosen   = inv_A[1]
-            player.prob_unchosen = inv_B[1]
-        elif player.project == 'Project B':
-            player.sunk_cost     = inv_B[0]
-            player.prob_chosen   = inv_B[1]
-            player.prob_unchosen = inv_A[1]
+        project_creation(player)
+        while player.prob_chosen == player.prob_unchosen:
+            project_creation(player)
         
         player.end_1 = int(time.time())
         return dict(
@@ -131,13 +135,12 @@ class Project_continuation(Page):
 
     @staticmethod
     def vars_for_template(player):
-        player.start_1   = int(time.time())
-        player.current_balance = C.initial_endowment - player.sunk_cost + C.revenue_buffer
+        player.start_1            = int(time.time())
         return dict(
             sunk_cost             = player.sunk_cost,
             prob_success_chosen   = player.prob_chosen,
             prob_success_unchosen = player.prob_unchosen,
-            current_balance       = player.current_balance,
+            current_balance       = C.initial_endowment - player.sunk_cost + C.revenue_buffer,
             start_1               = player.start_1 
         )
 
