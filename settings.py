@@ -30,8 +30,8 @@ PARTICIPANT_FIELDS = [
     'sunk_cost',
     'prob_chosen',
     'prob_unchosen',
-    'current_balance',
-    'timeSpent_1',
+    'RT1',
+    'RT2'
 ]
 SESSION_FIELDS = []
 
@@ -41,7 +41,7 @@ LANGUAGE_CODE = 'en'
 
 # e.g. EUR, GBP, CNY, JPY
 REAL_WORLD_CURRENCY_CODE = 'USD'
-USE_POINTS = True
+USE_POINTS = False
 
 ROOMS = [
     

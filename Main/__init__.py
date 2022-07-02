@@ -54,7 +54,8 @@ class Player(BasePlayer):
     end_1            = models.IntegerField(blank=True)
     start_2          = models.IntegerField(blank=True)
     end_2            = models.IntegerField(blank=True)
-
+    RT1              = models.IntegerField(blank=True)
+    RT2              = models.IntegerField(blank=True)
 
     # Attributes of the treatment to be saved for each player
     sunk_cost        = models.IntegerField(blank=True)
@@ -122,10 +123,12 @@ class Project_selection(Page):
         project_creation(player)
         while player.prob_chosen == player.prob_unchosen:
             project_creation(player)
-        
+
         player.end_1 = int(time.time())
+        player.RT1   = player.end_1 - player.start_1
         return dict(
-            end_1 = player.end_1
+            end_1 = player.end_1,
+            RT1   = player.RT1
         )
   
         
@@ -135,20 +138,22 @@ class Project_continuation(Page):
 
     @staticmethod
     def vars_for_template(player):
-        player.start_1            = int(time.time())
+        player.start_2            = int(time.time())
         return dict(
             sunk_cost             = player.sunk_cost,
             prob_success_chosen   = player.prob_chosen,
             prob_success_unchosen = player.prob_unchosen,
             current_balance       = C.initial_endowment - player.sunk_cost + C.revenue_buffer,
-            start_1               = player.start_1 
+            start_2               = player.start_2
         )
 
     @staticmethod
     def before_next_page(player, timeout_happened):
         player.end_2 = int(time.time())
+        player.RT2   = player.end_2 - player.start_2
         return dict(
-            end_2 = player.end_2
+            end_2 = player.end_2,
+            RT2   = player.RT2
         )
   
 
