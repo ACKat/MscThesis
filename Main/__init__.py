@@ -121,8 +121,6 @@ class Project_selection(Page):
     @staticmethod
     def before_next_page(player, timeout_happened):
         project_creation(player)
-        while player.prob_chosen == player.prob_unchosen:
-            project_creation(player)
 
         player.end_1 = int(time.time())
         player.RT1   = player.end_1 - player.start_1
