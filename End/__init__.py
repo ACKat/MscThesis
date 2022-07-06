@@ -1,5 +1,4 @@
 from otree.api import *
-from pyparsing import ParseSyntaxException
 
 
 doc = """
