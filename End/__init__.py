@@ -1,4 +1,5 @@
 from otree.api import *
+from pyparsing import ParseSyntaxException
 
 
 doc = """
@@ -10,7 +11,6 @@ class C(BaseConstants):
     NAME_IN_URL = 'EndPage'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
-    ProlificLink = "https://app.prolific.co/submissions/complete?cc=1EA38881"
 
 
 class Subsession(BaseSubsession):
@@ -22,18 +22,13 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    autosubmit = models.BooleanField(blank=True)
+    ParseSyntaxException
 
 
 # PAGES
 
 class EndPage(Page):
-    timeout_seconds = 5
-
-    @staticmethod
-    def before_next_page(player, timeout_happened):
-        if timeout_happened:
-            player.autosubmit = True
+    pass
 
 
 page_sequence = [EndPage]
