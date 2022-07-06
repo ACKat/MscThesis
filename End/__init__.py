@@ -21,7 +21,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    ParseSyntaxException
+    pass
 
 
 # PAGES
