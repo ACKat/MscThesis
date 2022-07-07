@@ -57,7 +57,14 @@ class Player(BasePlayer):
         ]
     )
     education_field = models.StringField(label= 'What is/was your primary field of studies if any?')
-    autosubmit = models.BooleanField(blank=True)
+
+    def custom_export(players):
+        # header row
+        yield ['session', 'justification', 'age', 'gender', 'education_field', 'education_level']
+        for p in players:
+            participant = p.participant
+            session = p.session
+            yield [session.code, participant.justification, participant.age, participant.gender, participant.education_field, participant.education_level]
 
 
 # PAGES
