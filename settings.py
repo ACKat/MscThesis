@@ -26,12 +26,18 @@ SESSION_CONFIG_DEFAULTS = dict(
 
 PARTICIPANT_FIELDS = [
     'ProlificID',
+    'session'
     'additional_invest',
     'sunk_cost',
     'prob_chosen',
     'prob_unchosen',
     'RT1',
-    'RT2'
+    'RT2',
+    'justification', 
+    'age', 
+    'gender',
+    'education_field',
+    'education_level'
 ]
 SESSION_FIELDS = []
 
