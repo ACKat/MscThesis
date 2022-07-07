@@ -18,7 +18,7 @@ class C(BaseConstants):
     initial_inv_cost = [12,8]
     prob_success= [0.75, 0.25]
     revenue_buffer = 8
-    additional_revenue_if_success = 14
+    additional_revenue_if_success = 8
     additional_cost = 4
 
 
@@ -104,6 +104,14 @@ def calculate_payoff(player):
            player.payoff = C.initial_endowment - player.sunk_cost + C.revenue_buffer        
     return player.payoff   
 
+# Save at the participant level
+def custom_export(players):
+    # header row
+    yield ['session', 'additional_invest', 'sunk_cost', 'prob_chosen', 'prob_unchosen', 'RT1', 'RT2', 'payoff']
+    for p in players:
+        participant = p.participant
+        session = p.session
+        yield [session.code, participant.additional_invest, participant.sunk_cost, participant.prob_chosen, participant.prob_unchosen, participant.RT1, participant.RT2, participant.payoff]
 
 # PAGES
 class Project_selection(Page):
