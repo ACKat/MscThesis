@@ -24,6 +24,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     justification =  models.LongStringField(label='Please justify briefly your decision in the task you just completed:')
+    
     age = models.StringField(
         choices=[
             '18-24 years old', 
@@ -44,6 +45,7 @@ class Player(BasePlayer):
                 'Prefer not to answer'
         ]
     )
+    
     education_level = models.StringField(label= 'Please choose the level of completed education that best applies to your case:',
         choices=[
             'No schooling completed',
@@ -56,21 +58,70 @@ class Player(BasePlayer):
 
         ]
     )
+    
     education_field = models.StringField(label= 'What is/was your primary field of studies if any?')
 
-    def custom_export(players):
-        # header row
-        yield ['session', 'justification', 'age', 'gender', 'education_field', 'education_level']
-        for p in players:
-            participant = p.participant
-            session = p.session
-            yield [session.code, participant.justification, participant.age, participant.gender, participant.education_field, participant.education_level]
+    optimism = models.StringField(label= 'I have an optimistic view of life.',
+        choices=[
+            'Extremely',
+            'Very',
+            'Moderately',
+            'Slightly',
+            'Not at all' 
+        ]
+    )
+
+    risk_taking = models.StringField(label= 'I consider myself a risk-taking person.',
+        choices=[
+            'Extremely',
+            'Very',
+            'Moderately',
+            'Slightly',
+            'Not at all' 
+        ]
+    )
+
+    disappointment = models.StringField(label= 'I find it easy to overcome disappointment.',
+        choices=[
+            'Extremely',
+            'Very',
+            'Moderately',
+            'Slightly',
+            'Not at all' 
+        ]
+    )
+
+    counterfactual = models.StringField(label= 'I tend to engage often in counterfactual thinking (thinking of what could have been).',
+        choices=[
+            'Extremely',
+            'Very',
+            'Moderately',
+            'Slightly',
+            'Not at all' 
+        ]
+    )
+
+
+    self_blame = models.StringField(label= 'I engage in self-blame rather often, even in situations where I know I did the best I could given the situation.',
+        choices=[
+            'Extremely',
+            'Very',
+            'Moderately',
+            'Slightly',
+            'Not at all' 
+        ]
+    )
 
 
 # PAGES
 class Justification(Page):
-    form_model = 'player'
+    form_model  = 'player'
     form_fields = ['justification']
+
+
+class Personality(Page):
+    form_model  = 'player'
+    form_fields = ['optimism', 'risk_taking', 'disappointment', 'counterfactual', 'self_blame']
 
 
 
@@ -80,4 +131,4 @@ class Demographics(Page):
     
 
 
-page_sequence = [Justification, Demographics]
+page_sequence = [Justification, Personality, Demographics]

@@ -40,22 +40,24 @@
         </tr>
         <tr>
             <th>
-                Revenue buffer
+                Intermediate revenue (gained)
             </th>
             <td>
-                {{ C.revenue_buffer }}
+                {{ C.revenue_gained }}
             </td>
             <td> </td>
         </tr>
         <tr>
             <th>
-                Probability of success
+                Probability of project success
             </th>
             <td>
                 {{ prob_success_chosen }}
             </td>
             <td>
-                {{ prob_success_unchosen }}
+                {{ if prob_success_chosen != prob_success_unchosen }}
+                    {{ prob_success_unchosen }}
+                {{endif}}
             </td>
         </tr>
         <tr>

@@ -17,7 +17,7 @@ class C(BaseConstants):
     initial_endowment = 10 
     initial_inv_cost = [12,8]
     prob_success= [0.75, 0.25]
-    revenue_buffer = 8
+    revenue_gained = 8
     additional_revenue_if_success = 8
     additional_cost = 4
 
@@ -97,11 +97,11 @@ def calculate_payoff(player):
     if player.additional_invest:
         rand_num = np.random.randn()
         if rand_num <= player.prob_chosen:
-            player.payoff = C.initial_endowment - player.sunk_cost + C.revenue_buffer - C.additional_cost + C.additional_revenue_if_success
+            player.payoff = C.initial_endowment - player.sunk_cost + C.revenue_gained - C.additional_cost + C.additional_revenue_if_success
         else:
-            player.payoff = C.initial_endowment - player.sunk_cost + C.revenue_buffer - C.additional_cost
+            player.payoff = C.initial_endowment - player.sunk_cost + C.revenue_gained - C.additional_cost
     else:
-           player.payoff = C.initial_endowment - player.sunk_cost + C.revenue_buffer        
+           player.payoff = C.initial_endowment - player.sunk_cost + C.revenue_gained       
     return player.payoff   
 
 # Save at the participant level
@@ -149,7 +149,7 @@ class Project_continuation(Page):
             sunk_cost             = player.sunk_cost,
             prob_success_chosen   = player.prob_chosen,
             prob_success_unchosen = player.prob_unchosen,
-            current_balance       = C.initial_endowment - player.sunk_cost + C.revenue_buffer,
+            current_balance       = C.initial_endowment - player.sunk_cost + C.revenue_gained,
             start_2               = player.start_2
         )
 

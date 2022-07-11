@@ -96,7 +96,7 @@ class Instructions(Page):
 
 class Checks(Page):
 
-    timeout_seconds = 120
+    timeout_seconds = 180
 
     form_model  = 'player'
     form_fields = ['check_1']
