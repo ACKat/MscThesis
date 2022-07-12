@@ -55,7 +55,6 @@ class Player(BasePlayer):
             'Master degree',
             'Professional degree',
             'Doctorate degree'
-
         ]
     )
     
@@ -63,52 +62,38 @@ class Player(BasePlayer):
 
     optimism = models.StringField(label= 'I have an optimistic view of life.',
         choices=[
-            'Extremely',
-            'Very',
-            'Moderately',
-            'Slightly',
-            'Not at all' 
+            [True, 'Agree'],
+            [False, 'Disagree']
+
         ]
     )
 
     risk_taking = models.StringField(label= 'I consider myself a risk-taking person.',
         choices=[
-            'Extremely',
-            'Very',
-            'Moderately',
-            'Slightly',
-            'Not at all' 
+            [True, 'Agree'],
+            [False, 'Disagree']
         ]
     )
 
     disappointment = models.StringField(label= 'I find it easy to overcome disappointment.',
         choices=[
-            'Extremely',
-            'Very',
-            'Moderately',
-            'Slightly',
-            'Not at all' 
+            [True, 'Agree'],
+            [False, 'Disagree']
         ]
     )
 
-    counterfactual = models.StringField(label= 'I tend to engage often in counterfactual thinking (thinking of what could have been).',
+    counterfactual = models.StringField(label= 'I engage often in counterfactual thinking (thinking of what could have happened).',
         choices=[
-            'Extremely',
-            'Very',
-            'Moderately',
-            'Slightly',
-            'Not at all' 
+            [True, 'Agree'],
+            [False, 'Disagree']
         ]
     )
 
 
-    self_blame = models.StringField(label= 'I engage in self-blame rather often, even in situations where I know I did the best I could given the situation.',
+    self_blame = models.StringField(label= 'I engage often in self-blame, even in situations where I know I did the best I could given the situation.',
         choices=[
-            'Extremely',
-            'Very',
-            'Moderately',
-            'Slightly',
-            'Not at all' 
+            [True, 'Agree'],
+            [False, 'Disagree']
         ]
     )
 
