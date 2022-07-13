@@ -1,3 +1,4 @@
+from tkinter import Radiobutton
 from otree.api import *
 
 
@@ -61,6 +62,7 @@ class Player(BasePlayer):
     education_field = models.StringField(label= 'What is/was your primary field of studies if any?')
 
     optimism = models.StringField(label= 'I have an optimistic view of life.',
+        widget= widgets.RadioSelectHorizontal,
         choices=[
             [True, 'Agree'],
             [False, 'Disagree']
@@ -69,6 +71,7 @@ class Player(BasePlayer):
     )
 
     risk_taking = models.StringField(label= 'I consider myself a risk-taking person.',
+        widget= widgets.RadioSelectHorizontal,
         choices=[
             [True, 'Agree'],
             [False, 'Disagree']
@@ -76,6 +79,7 @@ class Player(BasePlayer):
     )
 
     disappointment = models.StringField(label= 'I find it easy to overcome disappointment.',
+        widget= widgets.RadioSelectHorizontal,
         choices=[
             [True, 'Agree'],
             [False, 'Disagree']
@@ -83,6 +87,7 @@ class Player(BasePlayer):
     )
 
     counterfactual = models.StringField(label= 'I engage often in counterfactual thinking (thinking of what could have happened).',
+        widget= widgets.RadioSelectHorizontal,
         choices=[
             [True, 'Agree'],
             [False, 'Disagree']
@@ -91,6 +96,7 @@ class Player(BasePlayer):
 
 
     self_blame = models.StringField(label= 'I engage often in self-blame, even in situations where I know I did the best I could given the situation.',
+        widget= widgets.RadioSelectHorizontal,
         choices=[
             [True, 'Agree'],
             [False, 'Disagree']
