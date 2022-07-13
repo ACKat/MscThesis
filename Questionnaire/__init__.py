@@ -25,7 +25,7 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     justification =  models.LongStringField(label='Please justify briefly your decision in the task you just completed:')
     
-    age = models.StringField(
+    age = models.StringField(label= 'Age:',
         choices=[
             '18-24 years old', 
             '25-34 years old',
@@ -60,7 +60,7 @@ class Player(BasePlayer):
     
     education_field = models.StringField(label= 'What is/was your primary field of studies if any?')
 
-    optimism = models.StringField(label= 'I have an optimistic view of life.',
+    optimism = models.BooleanField(label= 'I have an optimistic view of life.',
         widget= widgets.RadioSelectHorizontal,
         choices=[
             [True, 'Agree'],
@@ -69,7 +69,7 @@ class Player(BasePlayer):
         ]
     )
 
-    risk_taking = models.StringField(label= 'I consider myself a risk-taking person.',
+    risk_taking = models.BooleanField(label= 'I consider myself a risk-taking person.',
         widget= widgets.RadioSelectHorizontal,
         choices=[
             [True, 'Agree'],
@@ -77,7 +77,7 @@ class Player(BasePlayer):
         ]
     )
 
-    disappointment = models.StringField(label= 'I find it easy to overcome disappointment.',
+    disappointment = models.BooleanField(label= 'I find it easy to overcome disappointment.',
         widget= widgets.RadioSelectHorizontal,
         choices=[
             [True, 'Agree'],
@@ -85,7 +85,7 @@ class Player(BasePlayer):
         ]
     )
 
-    counterfactual = models.StringField(label= 'I engage often in counterfactual thinking (thinking of what could have happened).',
+    counterfactual = models.BooleanField(label= 'I engage often in counterfactual thinking (thinking of what could have happened).',
         widget= widgets.RadioSelectHorizontal,
         choices=[
             [True, 'Agree'],
@@ -94,7 +94,7 @@ class Player(BasePlayer):
     )
 
 
-    self_blame = models.StringField(label= 'I engage often in self-blame, even in situations where I know I did the best I could given the situation.',
+    self_blame = models.BooleanField(label= 'I engage often in self-blame, even in situations where I know I did the best I could given the situation.',
         widget= widgets.RadioSelectHorizontal,
         choices=[
             [True, 'Agree'],
