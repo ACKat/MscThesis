@@ -1,4 +1,3 @@
-from tkinter import Radiobutton
 from otree.api import *
 
 
