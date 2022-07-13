@@ -10,6 +10,7 @@ class C(BaseConstants):
     NAME_IN_URL = 'Early_exit'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
+    Early_exit_link = "https://app.prolific.co/submissions/complete?cc=9414AA2A"
 
 
 class Subsession(BaseSubsession):

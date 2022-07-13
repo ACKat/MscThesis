@@ -10,6 +10,7 @@ class C(BaseConstants):
     NAME_IN_URL = 'EndPage'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
+    ProlificLink = "https://app.prolific.co/submissions/complete?cc=755C411E"
 
 
 class Subsession(BaseSubsession):
