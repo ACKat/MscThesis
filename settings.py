@@ -41,6 +41,7 @@ USE_POINTS = False
 ROOMS = [
     
     dict(name='prolific', display_name='Prolific Room'),
+    dict(name='nonprolific', display_name='Friends'),
 ]
 
 
